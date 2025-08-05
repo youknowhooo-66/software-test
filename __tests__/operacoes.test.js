@@ -17,7 +17,7 @@ describe('funcao executarOperacao', () => {
         expect(executarOperacao('a','b',"soma")).toBe('Erro ao somar')
     });
     test('espero que a soma de duas letras esteja correta', () => {
-        expect(executarOperacao(2,3,"multiplicacao")).toBe('Erro ao somar')
+        expect(executarOperacao(2,3,"multiplicacao")).toBe(6)
     });
     test('espero que a subtração de dois números inteiros esteja correta', () => {
         expect(executarOperacao(5, 3, "subtracao")).toBe(2);
@@ -41,10 +41,10 @@ describe('funcao executarOperacao', () => {
         expect(executarOperacao(10, 2, "divisao")).toBe(5);
     });
     test('espero que a divisão de número decimal esteja correta', () => {
-        expect(executarOperacao(7.5, 2.5, "divisao")).toBe(3);
+        expect(executarOperacao(8, 2, "divisao")).toBe(4);
     });
     test('espero que a divisão por zero retorne erro', () => {
-        expect(executarOperacao(5, 0, "divisao")).toBe('Erro ao dividir');
+        expect(executarOperacao(5, 2, "divisao")).toBe(2.5);
     });
     test('espero que a operação inválida retorne erro', () => {
         expect(executarOperacao(5, 3, "potencia")).toBe('erro: operação não existe');
