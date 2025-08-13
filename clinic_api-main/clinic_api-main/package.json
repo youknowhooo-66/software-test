@@ -5,7 +5,8 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "npx nodemon src/app.js",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
   },
   "keywords": [],
   "author": "",
@@ -15,6 +16,7 @@
     "@prisma/extension-accelerate": "^2.0.2",
     "dotenv": "^17.2.1",
     "express": "^5.1.0",
-    "prisma": "^6.13.0"
+    "prisma": "^6.13.0",
+    "jest": "^30.0.5"
   }
 }
