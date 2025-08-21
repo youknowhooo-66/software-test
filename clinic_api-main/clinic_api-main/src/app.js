@@ -37,6 +37,88 @@ app.get("/usuarios/:id", async(req,res) => {
     }
 })
 
+app.get('/paciente', async (req,res) => {
+    try{
+        const pacientes = await prismaClient.paciente.findMany();
+        return res.json(pacientes)
+    }
+    catch (e){
+        console.log(e)
+    }
+});
+
+app.get("/paciente/:id", async(req,res) => {
+    const { params } = req
+    try{
+        const pacientes = await prismaClient.paciente.findUnique({
+            where: {
+                id: Number(req.Number(params.id))
+            }
+        })
+
+        if(pacientes == null){
+            return res.status(404).send("Paciente não existe");
+        }
+
+        return res.json(pacientes)
+    }
+    catch (e){
+        console.log(e)
+    }
+})
+
+app.get('/exame', async (req,res) => {
+    try{
+        const exames = await prismaClient.exame.findMany();
+        return res.json(exames)
+    }
+    catch (e){
+        console.log(e)
+    }
+});
+
+app.post('/paciente', async (req,res) => {
+    try{
+    const dataFormatadaISO = toISOString();
+    const { body } = req
+    const pacientes = await prismaClient.paciente.create({
+        data: {
+            nome:           body.nome,
+            cpf:            body.cpf,
+            telefone:       body.telefone,
+            email:          body.email,
+            data_nascimento: dataFormatadaISO,
+            sexo:           body.sexo,
+            responsavel:    body.responsavel,
+        },
+    })
+    return res.status(201).json(pacientes)
+}
+catch (e){
+    console.log(e)
+}
+});
+
+app.post('/exame', async (req,res) => {
+        try{
+        const { body } = req
+        const exames = await prismaClient.exame.create({
+            data: {
+                tipo_exame:   body.tipo_exame,
+                resultado:    body.resultado,
+                data_exame:   body.data_exame,
+                link_arquivo: body.link_arquivo,
+                observacoes:  body.observacoes,
+                paciente_id:  body.paciente_id,
+            },
+        })
+        return res.status(201).json(exames)
+    }
+    catch (e){
+        console.log(e)
+    }
+});
+
 app.post("/usuarios", async(req, res)=> {
   try {
     const { body } = req
@@ -93,6 +175,25 @@ app.put("/usuarios/:id", async(req,res)=>{
         }
 
         console.log(error)
+    }
+})
+
+app.delete("/usuarios/:id", async(req,res)=>{
+    const {params} = req
+    try{
+        const usuarioDeletado = await prismaClient.usuario.delete({
+            where: {
+                id: Number(params.id),
+            }
+        })
+        res.status(200).json({
+            message: "Usuário Deletado!",
+            data: usuarioDeletado
+    })
+    }catch(error){
+        if(error.code === "P2025"){
+            res.status(404).send("Não existe um usuário com esse id. Verifique e tente novamente!")
+        }
     }
 })
 
