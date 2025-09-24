@@ -1,11 +1,10 @@
 import { Router } from "express";
-import { ExameController } from "../controller/Exame/ExameController.js";
+import { exameController } from "../controller/Exame/ExameController.js";
 
-export const exameRouter = Router();
-const exameController = new ExameController();
+export const exameRouter = Router()
 
-exameRouter.get('/exames', (req, res) => exameController.getAll(req, res));
-exameRouter.get('/exames/:id', (req, res) => exameController.getById(req, res));
-exameRouter.post('/exames', (req, res) => exameController.create(req, res));
-exameRouter.put('/exames/:id', (req, res) => exameController.update(req, res));
-exameRouter.delete('/exames/:id', (req, res) => exameController.delete(req, res));
+exameRouter.get("/exames", exameController.pegarTodosExames)
+exameRouter.get("/exames/:id", exameController.pegarExamePorId)
+exameRouter.post("/exames", exameController.criarExame)
+exameRouter.put("/exames/:id", exameController.atualizarExame)
+exameRouter.delete("/exames/:id", exameController.deletarExame)

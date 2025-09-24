@@ -1,12 +1,21 @@
 import express from 'express'
+import cors from "cors";
+
 import { usuarioRouter } from './routes/usuarios.js'
 import { exameRouter } from './routes/exame.js'
 import { pacientesRouter } from './routes/pacientes.js'
 import { prontuarioRouter } from './routes/prontuario.js'
 import { consultasRouter } from './routes/consulta.js'
 
+
 const app = express()
-app.use(express.json())
+app.use(express.json());
+app.use(cors()); 
+
+app.get("/ping", (req, res) => {
+  console.log(" GET /ping chegou");
+  res.send("pong");
+});
 
 // rotas usurio
 app.use(usuarioRouter);

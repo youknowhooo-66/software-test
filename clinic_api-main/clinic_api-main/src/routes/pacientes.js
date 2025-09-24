@@ -1,11 +1,10 @@
 import { Router } from "express";
-import { PacientesController } from "../controller/Pacientes/PacientesController.js";
+import { pacientesController } from "../controller/Pacientes/PacientesController.js"
 
-export const pacientesRouter = Router();
-const pacientesController = new PacientesController();
+export const pacientesRouter = Router()
 
-pacientesRouter.get('/pacientes', (req, res) => pacientesController.getAll(req, res));
-pacientesRouter.get('/pacientes/:id', (req, res) => pacientesController.getById(req, res));
-pacientesRouter.post('/pacientes', (req, res) => pacientesController.create(req, res));
-pacientesRouter.put('/pacientes/:id', (req, res) => pacientesController.update(req, res));
-pacientesRouter.delete('/pacientes/:id', (req, res) => pacientesController.delete(req, res));
+pacientesRouter.get("/pacientes", pacientesController.pegarTodosPacientes)
+pacientesRouter.get("/pacientes/:id", pacientesController.pegarPacientesPorId)
+pacientesRouter.post("/pacientes", pacientesController.criarPacientes)
+pacientesRouter.put("/pacientes/:id", pacientesController.atualizarPacientes)
+pacientesRouter.delete("/pacientes/:id", pacientesController.deletePacientes)

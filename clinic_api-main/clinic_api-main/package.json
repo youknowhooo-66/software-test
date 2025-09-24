@@ -3,20 +3,27 @@
   "version": "1.0.0",
   "description": "API for students development clinic project",
   "type": "module",
-  "main": "index.js",
+  "main": "src/app.js",
   "scripts": {
     "start": "npx nodemon src/app.js",
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "seed": "node prisma/seed.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@prisma/client": "^6.13.0",
-    "@prisma/extension-accelerate": "^2.0.2",
+    "bscript": "^0.1.0",
+    "cors": "^2.8.5",
     "dotenv": "^17.2.1",
     "express": "^5.1.0",
-    "prisma": "^6.13.0",
-    "jest": "^30.0.5"
+    "jsonwebtoken": "^9.0.2"
+  },
+  "devDependencies": {
+    "prisma": "^6.13.0"
+  },
+  "prisma": {
+    "seed": "node prisma/seed.js"
   }
 }
